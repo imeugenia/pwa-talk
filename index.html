@@ -24,8 +24,291 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+
+				 <!-- Why do we need it? -->
+				<section>
+					<img src='./images/mobile-web-reach.png' alt='' />
+					<span class="source">Source: <a href='https://www.youtube.com/watch?v=m-sCdS0sQO8'>Progressive Web Apps: Great Experiences Everywhere</a></span>
+					<aside class="notes">
+						This is a screenshot from Google I/O 2017 talk about PWA. The lovely part about Web is it's wide audience. It's obvious that people visit websites more than apps.
+					</aside>
+				</section>
+				<section>
+					<img src='./images/mobile-web-engagement.png' alt='' />
+					<span class="source">Source:
+						<a href='https://www.youtube.com/watch?v=m-sCdS0sQO8'>Progressive Web Apps: Great Experiences Everywhere</a>
+					</span>
+					<aside class="notes">
+						However they just visit web pages and quickly quit, but they continue using apps for a long time.
+					</aside>
+				</section>
+				<section style="text-align: center">
+					<span>Wide reach + Engagement = PWA <span style='color:red'><3</span></span>
+					<aside class="notes">
+						The main idea around PWA is that they combine the best parts of web and native apps, providing wide reach of audience and big user engagement.
+					</aside>
+				</section>
+				<!-- Main characteristics -->
+				<section>
+					<h3>PWA...</h3>
+					<ul>
+						<li>Works offline</li>
+						<li>Is fast</li>
+						<li>Behaves like a native app</li>
+						<li>Is secure</li>
+					</ul>
+					<aside class="notes">
+						TODO: describe each point in detail
+					</aside>
+				</section>
+
+				<!-- How it works? -->
+				<section>
+					<h1>Service Worker</h1>
+					<aside class="notes">
+						Service worker is brings super power to PWA. It is responsible for offline work, fast loading, push notifications and so on.
+						It is basically a JavaScript file that works in a browser on a background, it can control the web page, modifying resource requests, and caching resources. It gives you complete control over your app even when it is offline and it's behaviour in certain situations.
+					</aside>
+				</section>
+				<section>
+					<img src='./images/offline-first-diagram.png' alt=''/>
+					<aside class="notes">
+						This diagram shows the main idea of SW. As soon it is registered and all neccessafy files (html, css, js, images etc.) are cached, it get's response from cache if there is no internet connection or from a server if we have connection (however you can put your own logic there).
+
+						Some people say that there is nothing new because there was similar API before called AppCache. That allowed you to cache your website files and display them offline. However SW is more low-level and event-driven API. As it is shown on the picture all requests are intercepted by SW, because it has access not only to Cache API but to Fetch API as well. Using fetch event you can control which response in which case to return. And there is much more like push notifications,<a href='https://developers.google.com/web/fundamentals/security/credential-management/'>credential management</a>, <a href='https://www.chromestatus.com/feature/6170807885627392'>background syncronization</a> etc.
+					</aside>
+				</section>
+				<section>
+					<h3>Service worker...</h3>
+					<ul>
+						<li>can't access DOM directly</li>
+						<li>controls network requests</li>
+						<li>is asyncronous by nature</li>
+						<li>lives by it's own lyfecycle</li>
+					</ul>
+					<aside class="notes">
+						What you need to know about SW?
+						<ol>
+							<li>As it is Web Worker that runs on a background you can't manupulate with DOM directly</li>
+							<li>In Google developer docs it is written that SW might support more things in future like geofencing. But now it's main functionality is intercept and handle network requests.</li>
+							<li>You will see a lot Promises in SW syntax, because all methods are asyncronous</li>
+							<li>SW undergoes certain steps before it starts it's main work</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					Regiter => Install => Activate => Fetch
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					register()
+					<img src='./images/registration.png' alt='' />
+					<aside class="notes">
+						The first thing we should do is register our sw file. We check if it exists in WorkerGlobalScope and call register methos as soon as out page is loaded. As this method returns a promise, with using then() we wait until registration is finished and show a message in console.
+
+						This is important where do you locate your sw.js file, if it is not in a root it will be able to control requests and responses only in a scope it is located.
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					Handle 'install' event
+					<img src='./images/install.png' alt='' />
+					<aside class="notes">
+						Inside a callback function of intall event we are caching all files we want to be accessible offline. We name our cache, list all urls in an array and use cache methods like open() and addAll() to save these files in cache. As this methods return promises we use waitUntil() .
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					Handle 'fetch' event
+					<img src='./images/fetch.png' alt='' />
+					<aside class="notes">
+						When our SW is installed it starts to receive fetch events. Here is a place where we control requests and responses. We take url that is requested, check if it matches whith cached files and if there is match we respond with a file from cache, if not then we use fetch method to make a network request.
+
+						It is very simple example of what can be done on this stage. We can do more, for example, adding new files to cache.
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					Handle 'activate' event
+					<img src='./images/activate.png' alt='' />
+					<aside class="notes">
+						Here in activate event callback, we can manage our cache, for example, delete old/unused cache. In this example we changed the name of cache and want to delete the old one.
+					</aside>
+				</section>
+
+				 <!-- App Manifest -->
+				<section style="text-align: center">
+					<img style="height: 100vh" src='./images/splash-screen.png' alt='' />
+					<aside class="notes">
+						This is a splash screen. A screen that appears between the content of your app is loaded. It is very easy to add it with help of Web App Manifest.
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					Web App Manifest
+					<img src='./images/manifest.png' alt='' />
+					<aside class="notes">
+						This is a simple JSON file that helps to control how your app appears to the user, how splash screen will look, what will be the first view, how it will be launched.
+
+						The most important member is "display" which describes how app window will look. If you set "standalone" the application will look and feel like a native, having a different window, its own icon in the application launcher, etc. It will be launched by browser, of course, but browser's UI will not display.
+					</aside>
+				</section>
+				<!-- If your app is PWA then -->
+				<section style="text-align: center">
+					<img style="height: 100vh" src='./images/add-homescreen.png' alt='' />
+					<aside class="notes">
+						If you follow PWA criteria, Chrome will offer to add your app to homescreen automatically.
+					</aside>
+				</section>
+				<!-- App Shell -->
+				<section>
+					<h1>App Shell</h1>
+					<aside class="notes">
+						There is such a term - app shell which is the minimal HTML, CSS, and JavaScript powering a user interface. You just cache them using SW and they are appearing before dynamic content arrives.
+					</aside>
+				</section>
+				<!-- IndexedDB -->
+				<section>
+					<span>Where should offline data be stored?</span>
+					<aside class="notes">
+						There might be some content data you want to store somewhere, not in cache.
+					</aside>
+				</section>
+					<section>
+						<span>IndexedDB</span>
+						// Here will be an image
+						<aside class="notes">
+							It is a client-side storage for big amounts of structured data. It is possible to store data with SW, because it has access to IndexedDB API.
+							IndexedDB lets you store and retrieve objects that are indexed with a key. Let's say you have a PWA which works offline and users can add some data into this app. This data could be stored in IndexedDB and after we have internet connection we can syncronize data with our server database.
+							This API works asyncronously as well.
+						</aside>
+					</section>
+				<!-- Additional feateres -->
+				<section>
+					<h3>What else can we use?</h3>
+					<ul>
+						<li>Push notifications</li>
+						<li>Web Payments</li>
+						<li>Credential management</li>
+					</ul>
+					<aside class="notes">
+						TODO: Add more info here
+					</aside>
+				</section>
+				<!-- How well is it supported? -->
+				<section>
+					<h1>What about browser support?</h1>
+				</section>
+				<section>
+					<span>Service Worker</span>
+					<img src='./images/sw-support.png' />
+					<aside class='notes'>
+						Despite SW Safari started to support SW, it has different SW concept. In Safari SW are used to keep only the stored information that is useful to the user. If SW is not used WebKit will remove it after a period of a few weeks. Caches that do not get opened after a few weeks will also be removed.
+						It means that the original concept of PWA — provide more engagement by offering offline first experience will not work in case of Safari.
+
+						<a href='https://webkit.org/blog/8090/workers-at-your-service/'>Source</a>
+					</aside>
+				</section>
+				<section>
+					<span>Indexed DB 2.0</span>
+					<img src='./images/index-db-support.png' />
+					<aside class="notes">
+						We can be sure that Index DB will work in almost any browser.
+					</aside>
+				</section>
+				<section>
+					<span>Push API</span>
+					<img src='./images/push-api-support.png' />
+					<aside class="notes">
+						Push notifications are supported by Chrome and Firefox. Despite Safari doesn't support this API yet, you can send notifications using <a href='https://goo.gl/g4sxcN'>Apple Push Notification service</a>, but it works only for desktop.
+					</aside>
+				</section>
+				<section>
+					<span>Credential Management API</span>
+					<img src='./images/credential-mngt-support.png' />
+					<aside class="notes">
+						This API allows us to store users credentials and we can automatically sign them in after session is expired and even syncronize account across devices.
+					</aside>
+				</section>
+				<!-- Firestore -->
+				<section style="text-align: center">
+					<h3>Cloud Firestore</h3>
+					<img src='./images/firestore-logo.svg' />
+					<aside class="notes">
+						Is a database from Firebase and Google Cloud platform. It is flexible, scalable, easy in querying data. But it is super useful for PWA at least for 2 reasons.
+					</aside>
+				</section>
+				<section>
+					<h3>Why Firestore?</h3>
+					<ol>
+						<li>Realtime updates</li>
+						<li>Offline support</li>
+					</ol>
+					<aside class="notes">
+						Realtime updates means that your user data will be synchronized across all connected devices. Which is handy for user experience.
+
+						Cloud Firestore caches data that your app is actively using, so the app can write, read, listen to, and query data even if the device is offline. When the device comes back online, Cloud Firestore synchronizes any local changes back to database.
+						You just need to enable offline data syncrozation in your app using their API and Firestore does it's magic.
+					</aside>
+				</section>
+				<section style="text-align: center">
+					<h3>How is it structured?</h3>
+					<img src='./images/firestore-structure.png' />
+					<div class="source">Source: <a href="https://firebase.google.com/docs/firestore/">Cloud Firestore</a></div>
+					<aside class="notes">
+						In this database you store data in documents that contain fields with values of different types. These documents are stored in collections. Collections help you organize your data and make queries.
+						You can also create subcollections within documents and build hierarchical data trees.
+					</aside>
+				</section>
+				<section style="text-align: center">
+					// Here will be an image with hierarchical database illustration
+					<aside class="notes">
+						It is illustrated here how collections store documents and how documents can have treir own collections.
+					</aside>
+				</section>
+				<section style="text-align: center">
+					<h3>How to get started?</h3>
+					<ol>
+						<li>Create a project in Firebase console</li>
+						<li>Enable Firestore</li>
+					</ol>
+					<aside class="notes">
+						TODO: add some images here
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					<img src='./images/firestore-start.png' />
+					<aside class="notes">
+						Firestore is very friendly for frontend developers. You just need to import Firebase modules, initialize your firebase app and firestore database. And start using Firestore API for querying, setting or deleting data.
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					<span>// Here I will show my example</span>
+					<aside class="notes">
+						The example is very simple app where you can add tasks, description and date. It is stored with Firestore.
+						<ol>
+							<li>Show the app</li>
+							<li>Show the database</li>
+							<li>Show service workers in dev tools</li>
+							<li>Enable offline mode</li>
+							<li>Reload the page, ensure it works offline</li>
+							<li>Modify data</li>
+							<li>Check in data base if something change (nothing changed there)</li>
+							<li>Look where Firestore is saving offline data. It is in IndexedDB.</li>
+							<li>Go online</li>
+							<li>Check how database has been syncronized</li>
+						</ol>
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					<span>// Here I will show steps (pieces of code) how to build it</span>
+					<aside class="notes">
+						<ol>
+							<li>Create react app has already service worker</li>
+							<li>Show how to get, set, delete data</li>
+							<li>Show how to enable offline updates</li>
+						</ol>
+					</aside>
+				</section>
 			</div>
 		</div>
 
