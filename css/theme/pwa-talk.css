@@ -18,17 +18,7 @@ body {
   font-family: 'Roboto Mono', monospace;
   font-size: 42px;
   font-weight: normal;
-  color: #fff; }
-
-::selection {
-  color: #fff;
-  background: #bee4fd;
-  text-shadow: none; }
-
-::-moz-selection {
-  color: #fff;
-  background: #bee4fd;
-  text-shadow: none; }
+  color: #ffe7e3; }
 
 .reveal .slides > section,
 .reveal .slides > section > section {
@@ -45,7 +35,7 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #fff;
+  color: #ffe7e3;
   font-family: 'Roboto Mono', monospace;
   font-weight: 600;
   line-height: 1.2;
@@ -199,7 +189,7 @@ body {
  *********************************************/
 .reveal .source {
   display: block;
-  font-size: 0.6em;
+  font-size: 0.3em;
 }
 
 .reveal a {
