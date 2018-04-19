@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>PWA</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/pwa-talk.css">
@@ -378,13 +378,14 @@
 						<span>IndexedDB</span>
 						// Here will be an image
 						<aside class="notes">
-							It is a client-side storage for big amounts of structured data. It is possible to store data with SW, because it has access to IndexedDB API.<br><br>
+							It is a client-side storage for big amounts of structured data.<br><br>
 							Let's say you have a PWA which works offline and users can add some data into this app. This data could be stored in IndexedDB and after we have internet connection we can syncronize data with our server database.
 						</aside>
 					</section>
 				<!-- Additional features -->
 				<section>
-					<span>How to syncronize data? 🤷‍</span>
+					<span>How to syncronize data?</span>
+					<span style="position: absolute; font-size: 3em;">🤷‍</span>
 					<img src="images/sync-problem.jpg" alt="" />
 					<aside class="notes">
 
@@ -393,9 +394,39 @@
 				<!-- Background syncronization -->
 				<section data-background-color="#ffffff">
 					Web Background synchronization
-					<img src="images/sync-event.png" alt="" />
+					<img src="images/sync-0.png" alt="" />
 					<aside class="notes">
 						The basic concept is that you can queue events within the browser that will fire in your Service Worker when the browser has network connectivity. Sync event fires when the browser goes from an offline state to an online state.
+					</aside>
+				</section>
+				<section style="transition: none" data-background-color="#ffffff">
+					<img src="images/sync-1.png" alt="" />
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section style="transition: none" data-background-color="#ffffff">
+					<img src="images/sync-2.png" alt="" />
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section style="transition: none" data-background-color="#ffffff">
+					<img src="images/sync-3.png" alt="" />
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section style="transition: none" data-background-color="#ffffff">
+					<img src="images/sync-4.png" alt="" />
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section style="transition: none" data-background-color="#ffffff">
+					<img src="images/sync-5.png" alt="" />
+					<aside class="notes">
+
 					</aside>
 				</section>
 				<section>
