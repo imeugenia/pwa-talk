@@ -247,7 +247,7 @@
 					<aside class="notes">
 						> yes, but not really. <br>
 						> different architecture <br>
-						> WW — interface for running CPU consuming code like clint-side encryption or calculations for animation. This code will run on a separate thread and will not block executing of the rest of the code. <br>
+						> WW — interface for running CPU consuming code like client-side encryption or calculations for animation. This code will run on a separate thread and will not block executing of the rest of the code. <br>
 						> SW - kind of WW <br>
 						> but...
 					</aside>
@@ -441,7 +441,7 @@
 						<img src="images/indexeddb.png" alt="">
 						<aside class="notes">
 							> client-side storage for big amounts of structured data.<br><br>
-							> data is stored by key/value pairs
+							> data is stored by key/value pairs <br>
 							> we have offline PWA <br>
 							> users can add some data <br>
 							> store it in IndexedDB <br>
@@ -528,7 +528,8 @@
 
 						> offline support — caches data, so the app can write, read, listen to, and query data <br>
 						> When online — synchronizes any local changes <br>
-						> add API and Firestore library will handle that logic.
+						> add API and Firestore library will handle that logic. <br>
+						> still in BETA, but let's see what will be announced on Google I/O
 					</aside>
 				</section>
 				<section style="text-align: center">
@@ -573,7 +574,7 @@
 					<aside class="notes">
 						<ol>
 							<li><strong>Lighthouse</strong>— a tool for testing if your app match PWA criteria. It also tests UX and performance of your app</li>
-							<li><strong>Workbox</strong>— a library for !!!!!!</li>
+							<li><strong>Workbox</strong>— a library for easy caching of assets</li>
 							<li><strong>sw-precache</strong>— a tool that will generate a SW for you</li>
 							<li><strong>sw-toolbox</strong>— a library that will help to perform a caching strategy within a SW. There are 5 most common cache strategies already implemented in the library</li>
 							<li><strong>Create React App</strong>—SW is already there by default. I used it in demo project</li>
