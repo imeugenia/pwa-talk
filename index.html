@@ -34,7 +34,6 @@
 					I'm Jevgenija
 					<hr>
 					Web developer @N26 👩‍💻 <br>
-					UI design enthusiast 🦄<br>
 					Google Developer Group organizer 🎉<br>
 					Women TechMakers lead in Latvia 🇱🇻
 					<aside class="notes">
@@ -53,7 +52,7 @@
 						<li>PWA: Why? What? How?</li>
 						<li>Service Worker: caching and much more</li>
 						<li>Firestore for PWA</li>
-						<li>I'll show PWA example</li>
+						<li>Demo</li>
 					</ol>
 					<aside class="notes">
 						But I will speak not only about visually displaying your web app when it is offline. There are much more fundamental ideas beneath PWA. I will try to answer questions why? what? how?
@@ -64,7 +63,7 @@
 					<img src='./images/mobile-web-reach.png' alt='' />
 					<span class="source">Source: <a href='https://www.youtube.com/watch?v=m-sCdS0sQO8'>Progressive Web Apps: Great Experiences Everywhere</a></span>
 					<aside class="notes">
-						Why do we need to bring PWA to the Web? The lovely part about Web is it's wide audience. Statistically people visit websites more than apps.
+						Why do we need to bring PWA to the Web? The lovely part about Web is it's wide audience. Statistically websites reach more people than apps.
 					</aside>
 				</section>
 				<section>
@@ -73,12 +72,11 @@
 						<a href='https://www.youtube.com/watch?v=m-sCdS0sQO8'>Progressive Web Apps: Great Experiences Everywhere</a>
 					</span>
 					<aside class="notes">
-						However despite people visit web pages a lot, they most usually quickly quit. If they visit a native app, they continue using it for a long time. Which is disputable though,because in average we use about only 10 apps per.
+						However despite people visit web pages a lot, they usually quickly quit. If they visit a native app, they continue using it for a long time. Which is disputable though,because in average we use about only 10 apps per day.
 					</aside>
 				</section>
 				<section style="text-align: center">
 					<span>Wide reach + Engagement = PWA</span>
-					<img style="height: 2rem" src="images/party_parrot.gif" alt="">
 					<aside class="notes">
 						The main idea around PWA is that they combine the best parts of web and native apps, providing wide reach of audience and big user engagement. There are a lot of thing below making user engagement better.
 					</aside>
@@ -87,7 +85,7 @@
 				<section>
 					<h1>4 main characteristics</h1>
 					<aside class="notes">
-						We can speak about PWA a lot. I will focuse on 4 main characteristics.
+						We can speak about PWA a lot. Today I will focuse on 4 main characteristics.
 					</aside>
 				</section>
 				<section>
@@ -175,16 +173,14 @@
 				<section>
 					<img src='./images/offline-first-diagram.png' alt=''/>
 					<aside class="notes">
-						It acts like a proxy server.
+						It acts like a middleware between client and server.
 						As soon it is registered and all neccessafy files (html, css, js, images etc.) are cached, it get's response from cache if there is no internet connection or from a server if we have connection (however you can put your own logic there).
-
-
 					</aside>
 				</section>
 				<section>
 						<h3>=> Controls network requests</h3>
 						<aside class="notes">
-							It's main functionality is catch and handle network requests.
+							It's main function is catch and handle network requests.
 						</aside>
 				</section>
 				<section data-background-color="#ffffff">
@@ -198,7 +194,7 @@
 					<h3>Is asyncronous by nature</h3>
 					<aside class="notes">
 						You will see a lot Promises in SW syntax, because all methods are asyncronous.
-						You've probably heared that SW is running on the background of your web page. But what exactly does that mean? When a web page is rendered by a browser, it is happening in one main thread. But when it comes to asynchronous operations, they are run on the separate thread. SW is running on a thread, different from the main Javascript.
+						It is running on the background of your web page. But what exactly does that mean? When a web page is rendered by a browser, it is happening in one main thread. SW is running on a thread, different from the main Javascript. That is why it not blocking the rendering of the website.
 					</aside>
 				</section>
 				<section>
@@ -293,14 +289,14 @@
 					2. Listen to 'install' event
 					<img src='./images/install-3.png' alt='' />
 					<aside class="notes">
-						..and add all listed files in cache.
+						..and add all listed files in cache. And we are ready to go to..
 					</aside>
 				</section>
 				<section data-background-color="#ffffff">
 					3. Listen to 'activate' event
 					<img src='./images/activate-0.png' alt='' />
 					<aside class="notes">
-						There is also an activate event. The point where this event fires is a good time to clean up old caches and other things associated with the previous version of your service worker.
+						activativation state. The point where this event fires is a good time to clean up old caches and other things associated with the previous version of your service worker.
 						Let's say we want to change the key of our cache.
 					</aside>
 				</section>
@@ -371,12 +367,12 @@
 					<img src='images/homer_thinking.png' />
 					<h4>Where should offline data be stored?</h4>
 					<aside class="notes">
-						There might be some data you want to store somewhere, not in cache. SW hasn't access to localStorage because it is not asynchronous, but it can use IndexedDB API.
+						There might be some data you want to store somewhere, not in cache. By design SW hasn't access to localStorage, but it can use IndexedDB API.
 					</aside>
 				</section>
 					<section>
 						<span>IndexedDB</span>
-						// Here will be an image
+						<img src="images/indexeddb.png" alt="">
 						<aside class="notes">
 							It is a client-side storage for big amounts of structured data.<br><br>
 							Let's say you have a PWA which works offline and users can add some data into this app. This data could be stored in IndexedDB and after we have internet connection we can syncronize data with our server database.
@@ -385,52 +381,36 @@
 				<!-- Additional features -->
 				<section>
 					<span>How to syncronize data?</span>
-					<span style="position: absolute; font-size: 3em;">🤷‍</span>
-					<img src="images/sync-problem.jpg" alt="" />
+					<span style="position: absolute; font-size: 3em; top: 1em; right: 1em;">🤷‍</span>
+					<img style="width: 60%; margin-top: 1em;" src="images/sync-problem.jpg" alt="" />
 					<aside class="notes">
 
 					</aside>
 				</section>
 				<!-- Background syncronization -->
 				<section data-background-color="#ffffff">
-					Web Background synchronization
+					<h3>Web Background synchronization</h3>
+					<aside class="notes">
+						The basic concept is that SW is listening to sync events and this events are queued within browser when we are offline and be fired when we have network connection.
+						Sync event fires when the browser goes from an offline state to an online state. How to do this?
+					</aside>
+				</section>
+				<section data-background-color="#ffffff">
+					main.js
 					<img src="images/sync-0.png" alt="" />
 					<aside class="notes">
-						The basic concept is that you can queue events within the browser that will fire in your Service Worker when the browser has network connectivity. Sync event fires when the browser goes from an offline state to an online state.
+						In our main js file after we are done with SW registration and it is ready we register a sync event and give it a tag. By that we create a sync event.
 					</aside>
 				</section>
-				<section style="transition: none" data-background-color="#ffffff">
+				<section data-background-color="#ffffff">
+					sw.js
 					<img src="images/sync-1.png" alt="" />
 					<aside class="notes">
-
-					</aside>
-				</section>
-				<section style="transition: none" data-background-color="#ffffff">
-					<img src="images/sync-2.png" alt="" />
-					<aside class="notes">
-
-					</aside>
-				</section>
-				<section style="transition: none" data-background-color="#ffffff">
-					<img src="images/sync-3.png" alt="" />
-					<aside class="notes">
-
-					</aside>
-				</section>
-				<section style="transition: none" data-background-color="#ffffff">
-					<img src="images/sync-4.png" alt="" />
-					<aside class="notes">
-
-					</aside>
-				</section>
-				<section style="transition: none" data-background-color="#ffffff">
-					<img src="images/sync-5.png" alt="" />
-					<aside class="notes">
-
+						 We add event listener for sync event check if it is a sync event that we need and run method with syncronization logic which can fetch something that we need or send data to the server.
 					</aside>
 				</section>
 				<section>
-					Background sync support
+					Background sync event support
 					<img src="images/background-sync-support.png" alt="" />
 					<aside class="notes">
 						The problem is it is supported only by Chrome.
@@ -485,6 +465,35 @@
 					<img style="margin-left: 1rem" src="images/challenge_accepted.jpg" alt="">
 					<aside class="notes">
 						<a href="https://docs.google.com/document/d/136xYv7npx-ZtUerMwgKeEvnizQOqmuLsPXHTBrIvqz4/edit?usp=sharing">Text for demonstration</a>
+
+					</aside>
+				</section>
+				<section>
+					<h4>Useful tools/libraries</h4>
+					<ul>
+						<li>Lighthouse</li>
+						<li>Workbox</li>
+						<li>sw-precache</li>
+						<li>sw-toolbox</li>
+						<li>Create React App</li>
+						<li>Offline Google Analytics</li>
+						<li>PRPL pattern</li>
+					</ul>
+					<aside class="notes">
+						<ol>
+							<li><strong>Lighthouse</strong>— a tool for testing if your app match PWA criteria. It also tests UX and performance of your app</li>
+							<li><strong>Workbox</strong>— a library for !!!!!!</li>
+							<li><strong>sw-precache</strong>— a tool that will generate a SW for you</li>
+							<li><strong>sw-toolbox</strong>— a library that will help to perform a caching strategy within a SW. There are 5 most common cache strategies already implemented in the library</li>
+							<li><strong>Create React App</strong>—SW is already there by default. I used it in demo project</li>
+							<li><strong>Offline Google Analytics</strong>—it's possible to collect analytics data even offline!</li>
+							<li><strong>PRPL pattern</strong>— I suggest you to take a look on PRPL pattern for building a PWA. It provide set of techniques that make performance and caching efficiency better to achieve minimum time-to-interactive</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+
+					<aside class="notes">
 
 					</aside>
 				</section>
